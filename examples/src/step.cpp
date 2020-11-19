@@ -15,7 +15,30 @@
 #define ANSI_COLOR_NONE    "\x1b[30m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
-#define FMT_STRING "%+06.2f "
+// Always sign-prefixed ('+'/'-'); 6 chars long inc +/- & dot; left-space-padded.
+// eg "+12.34", "-23.45", "+345.67".
+// Values 100+ are longer than others, breaking layout!
+//#define FMT_STRING "%+06.2f "
+
+// Ints only; no '+' prefix (only '-'); 3 chars long; left-space-padded.
+// eg " 12", "123", "-23", "345".
+// 3-digit -ve values are rare; 3-digit +ve values are common.
+//  So 3 chars for +ve & -ve values should suffice for this use.
+//  That also makes it easier to fit on my 320x240 SPI TFT without
+//  shrinking the font beyond legibility!
+//#define FMT_STRING "%3.0f "
+
+// Same as above, but always showing 3 digits to make the text display
+//  look more like an image.
+// Ints only; no '+' prefix (only '-'); 3 chars long; left-zero-padded.
+// eg "012", "123", "-23", "345".
+// 3-digit -ve values are rare; 3-digit +ve values are common.
+//  So 3 chars for +ve & -ve values should suffice for this use.
+//  That also makes it easier to fit on my 320x240 SPI TFT without
+//  shrinking the font beyond legibility!
+#define FMT_STRING "%03.0f "
+
+// *shrug* Some kind of symbol/visual display?
 //#define FMT_STRING "\u2588\u2588\u2588"
 
 #define MLX_I2C_ADDR 0x33
