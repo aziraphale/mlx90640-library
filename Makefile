@@ -5,7 +5,7 @@ SRC_DIR = examples/src/
 BUILD_DIR = examples/
 LIB_DIR = $(SRC_DIR)lib/
 
-examples = test rawrgb step fbuf interp video hotspot sdlscale 
+examples = test rawrgb step step-24bit fbuf interp video hotspot sdlscale 
 examples_objects = $(addsuffix .o,$(addprefix $(SRC_DIR), $(examples)))
 examples_output = $(addprefix $(BUILD_DIR), $(examples))
 
@@ -53,6 +53,9 @@ $(BUILD_DIR)rawrgb: $(SRC_DIR)rawrgb.o libMLX90640_API.a
 
 $(BUILD_DIR)step: $(SRC_DIR)step.o libMLX90640_API.a
 	$(CXX) -L/home/pi/mlx90640-library $^ -o $@ $(I2C_LIBS)
+
+$(BUILD_DIR)step-24bit: $(SRC_DIR)step-24bit.o libMLX90640_API.a
+	    $(CXX) -L/home/pi/mlx90640-library $^ -o $@ $(I2C_LIBS)
 
 $(BUILD_DIR)fbuf: $(SRC_DIR)fbuf.o $(LIB_DIR)fb.o libMLX90640_API.a
 	$(CXX) -L/home/pi/mlx90640-library $^ -o $@ $(I2C_LIBS)
