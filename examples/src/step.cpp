@@ -15,6 +15,9 @@
 #define ANSI_COLOR_NONE    "\x1b[30m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
+// ####################################
+// ### SELECT OUTPUT FORMAT ###
+// ####################################
 // Always sign-prefixed ('+'/'-'); 6 chars long inc +/- & dot; left-space-padded.
 // eg "+12.34", "-23.45", "+345.67".
 // Values 100+ are longer than others, breaking layout!
@@ -101,7 +104,9 @@ int main(){
                     printf(ANSI_COLOR_RED FMT_STRING ANSI_COLOR_RESET, val);
                 }
                 else if (val > 26.0){
-                    printf(ANSI_COLOR_YELLOW FMT_STRING ANSI_COLOR_YELLOW, val);
+                    // Uh, why was this previously `ANSI_COLOR_YELLOW FMT_STRING ANSI_COLOR_YELLOW`?!
+                    //printf(ANSI_COLOR_YELLOW FMT_STRING ANSI_COLOR_YELLOW, val);
+                    printf(ANSI_COLOR_YELLOW FMT_STRING ANSI_COLOR_RESET, val);
                 }
                 else if ( val > 20.0 ){
                     printf(ANSI_COLOR_NONE FMT_STRING ANSI_COLOR_RESET, val);
@@ -118,7 +123,7 @@ int main(){
             }
             std::cout << std::endl;
         }
-        printf("\x1b[33A");
+        printf("\x1b[33A"); // Move cursor UP by 33
     }
     return 0;
 }
